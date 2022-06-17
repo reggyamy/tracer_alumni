@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Detail Pekerjaan"
+        app:navigationIcon="@drawable/ic_back"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_jobPosition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        tools:text="@tools:sample/lorem"
+        app:layout_constraintStart_toEndOf="@+id/cardView4"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_company"
+        style="@style/text_reg_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="126dp"
+        app:layout_constraintStart_toEndOf="@+id/cardView4"
+        app:layout_constraintTop_toBottomOf="@id/tv_jobPosition"
+        tools:text="@tools:sample/lorem" />
+
+
+    <TextView
+        android:id="@+id/tv_location"
+        style="@style/text_reg_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="126dp"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toEndOf="@+id/cardView4"
+        app:layout_constraintTop_toBottomOf="@id/tv_company"
+        tools:text="@tools:sample/lorem" />
+
+    <TextView
+        android:id="@+id/tv"
+        style="@style/text_medium_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detail Pekerjaan"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+
+    <TextView
+        android:id="@+id/tv2"
+        style="@style/text_reg_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipe Pekerjaan"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv" />
+
+    <TextView
+        android:id="@+id/tv_jobLevel"
+        style="@style/text_reg_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/lorem"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/tv2"
+        app:layout_constraintTop_toBottomOf="@+id/tv" />
+
+<!--    <androidx.appcompat.widget.AppCompatToggleButton-->
+<!--        android:id="@+id/bt_bookmark"-->
+<!--        android:layout_width="48dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:background="@drawable/bg_bt_bookmark"-->
+<!--        android:focusable="false"-->
+<!--        android:focusableInTouchMode="false"-->
+<!--        android:textOff=""-->
+<!--        android:textOn=""-->
+<!--        style="@style/Widget.AppCompat.Button.Borderless"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_jobLevel"/>-->
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/bt_bookmark"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_item_job"
+        android:backgroundTint="@color/light_blue"
+        android:src="@drawable/ic_bookmark_unfilled"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_jobLevel"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_apply"
+        style="@style/text_medium_18"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_search_bar"
+        android:backgroundTint="@color/blue"
+        android:gravity="center"
+        android:text="Lamar"
+        android:textAllCaps="false"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="75dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/bt_bookmark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_jobLevel" />
+
+    <TextView
+        android:id="@+id/tv3"
+        style="@style/text_medium_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diskripsi Pekerjaan"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bt_apply" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        style="@style/text_reg_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/lorem/random"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

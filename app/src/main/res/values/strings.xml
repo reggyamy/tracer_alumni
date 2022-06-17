@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Tracer Alumni</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_home">Beranda</string>
+    <string name="nama">Nama</string>
+    <string name="nim">NIM</string>
+    <string name="title_jobs">Lowongan</string>
+    <string name="title_activity_landing1">Landing1Activity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="sub_title_login">Masuk untuk melanjutkan</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="bt_login">Masuk</string>
+    <string name="data_diri">Data diri</string>
+    <string name="program_studi">Prodi</string>
+    <string name="ipk">IPK</string>
+    <string name="tahun_masuk">Tahun masuk</string>
+    <string name="tahun_lulus">Tahun lulus</string>
+    <string name="pekerjaan">Pekerjaan</string>
+    <string name="feedback">Saran untuk prodi</string>
+    <string name="kirim">Kirim</string>
+    <string name="save">Simpan</string>
+    <string name="batal">Batal</string>
+    <string name="title_ad_alumni">Masukkan prodi dan tahun masuk</string>
+    <string name="title_ad_address">Maukkan alamat saat ini</string>
+    <string name="title_ad_about">Ceritakan sedikit tentang dirimu</string>
+    <string name="title_profile">Profil</string>
+    <string name="pengaturan_akun">Pengaturan akun</string>
+    <string name="pengaturan_tambahan">Pengaturan tambahan</string>
+    <string name="ganti_password">Ganti password</string>
+    <string name="ganti_bahasa">Ganti bahasa</string>
+    <string name="postingan">Postingan</string>
+    <string name="interaksi">Interaksi</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="informasi_pribadi">Informasi pribadi</string>
+    <string name="logout">Keluar</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="connected">Yei..Koneksi Internet terhubung kembali</string>
+    <string name="not_connected">Coba hubungkan koneksi intermetmu lagi</string>
+    <string name="about">Tentang</string>
+    <string name="aktivitas_kiriman">Aktivitas kiriman</string>
+    <string name="suka">suka</string>
+    <string name="komentar">komentar</string>
+    <string name="error_et">Field tidak boleh kosong</string>
+    <string name="sudah_bekerja">Sudah bekerja</string>
+    <string name="belum_bekerja">Belum bekerja</string>
+    <string name="name_company">Nama perusahaan</string>
+    <string name="job_position">Posisi pekerjaan</string>
+</resources>

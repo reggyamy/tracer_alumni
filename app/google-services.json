@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566494632266",
+    "project_id": "firbase-notification-1fa12",
+    "storage_bucket": "firbase-notification-1fa12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566494632266:android:d25949677f2864676f49b3",
+        "android_client_info": {
+          "package_name": "com.reggya.traceralumni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566494632266-hnkunuv84afoenqj91qfobl952cuhh85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDISNpyK_hxQ9WXR1gzpr3M1aPBkcIXnaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566494632266-hnkunuv84afoenqj91qfobl952cuhh85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

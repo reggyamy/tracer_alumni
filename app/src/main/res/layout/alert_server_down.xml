@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_server_down"
+    android:layout_marginBottom="16dp"
+    android:visibility="gone"
+    android:background="@drawable/bg_search_bar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_search_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_server_error"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Server Down"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Yah, servernya down. Coba kembali beberapa saat lagi"
+            android:layout_marginTop="5dp"
+            style="@style/text_medium_16"
+            android:textColor="@color/dark_grey"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/button_connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button_save"
+            android:text="Kembali"
+            android:textAllCaps="false"
+            android:layout_marginTop="25dp"
+            android:paddingHorizontal="25dp"
+            android:layout_gravity="center_horizontal"
+            style="@style/text_medium_16_light"/>
+
+    </LinearLayout>
+
+</LinearLayout>

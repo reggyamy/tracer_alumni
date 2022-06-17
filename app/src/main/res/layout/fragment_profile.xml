@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_avatar"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/bt_add_pict"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:backgroundTint="#00FFFFFF"
+        android:layout_marginEnd="-15dp"
+        android:src="@drawable/ic_button_camera"
+        app:layout_constraintEnd_toEndOf="@+id/photo"
+        app:layout_constraintTop_toTopOf="@+id/photo"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/name"
+        style="@style/text_medium_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photo"
+        tools:text="Reggya Mayang Ratih" />
+
+    <TextView
+        android:id="@+id/tv_alumni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Alumni"
+        style="@style/text_medium_16"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/alumni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:background="@drawable/bg_textview"
+        android:hint="Teknik Elektro 2018"
+        android:textColor="@color/blue"
+        style="@style/text_reg_16"
+        android:textColorHint="#79AFF8"
+        android:paddingVertical="5dp"
+        android:paddingEnd="30dp"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@id/tv_alumni"/>
+
+    <ImageButton
+        android:id="@+id/add_alumni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_edit"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/alumni"
+        app:layout_constraintEnd_toEndOf="@+id/alumni"
+        app:layout_constraintTop_toTopOf="@+id/alumni"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Pekerjaan"
+        style="@style/text_medium_16"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/alumni"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/job"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:background="@drawable/bg_textview"
+        android:hint="Android developer"
+        android:textColorHint="#79AFF8"
+        android:textColor="@color/blue"
+        style="@style/text_reg_16"
+        android:paddingVertical="5dp"
+        android:paddingEnd="30dp"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@id/tv_job"
+        tools:layout_editor_absoluteX="40dp" />
+
+    <ImageButton
+        android:id="@+id/add_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_edit"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/job"
+        app:layout_constraintEnd_toEndOf="@+id/job"
+        app:layout_constraintTop_toTopOf="@+id/job"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Domisili"
+        style="@style/text_medium_16"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/job"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:background="@drawable/bg_textview"
+        android:hint="Jakarta"
+        style="@style/text_reg_16"
+        android:textColor="@color/blue"
+        android:textColorHint="#79AFF8"
+        android:paddingVertical="5dp"
+        android:paddingEnd="30dp"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@id/tv_address"/>
+
+    <ImageButton
+        android:id="@+id/add_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_edit"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/address"
+        app:layout_constraintEnd_toEndOf="@+id/address"
+        app:layout_constraintTop_toTopOf="@+id/address"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="15dp"
+        android:text="Tentang"
+        style="@style/text_medium_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/address"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:maxLength="200"
+        style="@style/text_reg_16"
+        android:gravity="fill_horizontal"
+        android:textColor="@color/blue"
+        app:layout_constraintTop_toBottomOf="@+id/tv_about"
+        android:hint="Ceritakan sedikit tentang dirimu"
+        tools:text="@tools:sample/lorem/random"
+        android:textColorHint="#79AFF8"/>
+
+    <ImageButton
+        android:id="@+id/add_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_about"
+        app:layout_constraintEnd_toEndOf="@+id/tv_about"
+        app:layout_constraintTop_toTopOf="@+id/tv_about"
+        tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

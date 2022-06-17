@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.reggya.traceralumni.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_postActivity"
+            app:destination="@id/postActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_userActivity"
+            app:destination="@id/userActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_jobs"
+        android:name="com.reggya.traceralumni.JobsFragment"
+        android:label="@string/title_jobs"
+        tools:layout="@layout/fragment_jobs" >
+        <action
+            android:id="@+id/action_navigation_jobs_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_bookmark"
+        android:name="com.reggya.traceralumni.BookmarkFragment"
+        android:label="@string/bookmark"
+        tools:layout="@layout/fragment_bookmark" >
+        <action
+            android:id="@+id/action_navigation_bookmark_to_navigation_jobs"
+            app:destination="@id/navigation_jobs" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.reggya.traceralumni.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+    <activity
+        android:id="@+id/postActivity"
+        android:name="com.reggya.traceralumni.PostActivity"
+        android:label="activity_post"
+        tools:layout="@layout/activity_post" />
+    <activity
+        android:id="@+id/userActivity"
+        android:name="com.reggya.traceralumni.UserActivity"
+        android:label="activity_user"
+        tools:layout="@layout/activity_user" />
+
+</navigation>

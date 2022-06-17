@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:title="@string/pengaturan_akun">
+            <menu>
+                <item
+                    android:id="@+id/item_privacy"
+                    android:title="@string/informasi_pribadi"
+                    android:icon="@drawable/ic_lock"/>
+                <item
+                    android:id="@+id/item_password"
+                    android:title="@string/ganti_password"
+                    android:icon="@drawable/ic_key"/>
+            </menu>
+        </item>
+
+        <item android:title="@string/pengaturan_tambahan">
+            <menu>
+                <item
+                    android:id="@+id/item_translate"
+                    android:title="@string/ganti_bahasa"
+                    android:icon="@drawable/ic_translate"/>
+            </menu>
+        </item>
+
+        <item android:title="@string/interaksi">
+            <menu>
+                <item
+                    android:id="@+id/item_posting"
+                    android:title="@string/postingan"
+                    android:icon="@drawable/ic_send"/>
+            </menu>
+        </item>
+    </group>
+
+
+</menu>
