@@ -26,12 +26,12 @@ interface ApiService {
                   @Field("gpa") gpa: String,
                   @Field("job_status") jobStatus: String,
                   @Field("company") company:String,
-                  @Field("conpany_address") companyAddress: String,
+                  @Field("company_address") companyAddress: String,
+                  @Field("job_position") position: String,
                   @Field("year_of_work") yearOfWork: String,
-                  @Field("job_position") posistion: String,
                   @Field("salary") salary: String,
                   @Field("feedback") feedback: String
-    ) : Flowable<SurveyResponse>
+    ) : Flowable<List<SurveyResponse>>
 
     @GET("apivacancy.php")
     fun getJobs(): Flowable<List<JobsResponse>>
@@ -42,7 +42,7 @@ interface ApiService {
     @Multipart
     @POST("uploadimage.php")
     fun uploadImage(@Part("id") id: RequestBody,
-                      @Part photo: MultipartBody.Part
+                    @Part photo: MultipartBody.Part
     ): Flowable<UserResponse>
 
     @FormUrlEncoded
@@ -89,7 +89,7 @@ interface ApiService {
     @GET("allpost.php")
     fun getAllPost():Flowable<List<PostResponse>>
 
-    @GET("postbyuserid.php")
+    @GET("postsbyuserid.php")
     fun getPostsByUserId(@Query("user_id")user_id: String): Flowable<List<PostResponse>>
     
 }

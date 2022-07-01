@@ -67,6 +67,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         val preferences = LoginPreference(requireContext())
         userId = preferences.getUsername()
 
+        binding.name.text = preferences.getName()
         viewModel.getUserById(userId.toString()).observe(viewLifecycleOwner) { apiResponse ->
                 when (apiResponse) {
                     ApiResponse.success(apiResponse.data) -> {
@@ -126,8 +127,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         submit.setOnClickListener {
             val job_ = etJob.text.toString().trim()
             val company_ = etCompany.text.toString().trim()
-            job = job_
-            company = company_
+            job = "$job_, $company_"
             val data ="$job_, $company_"
             binding.job.text = data
             setUpdateProfile()
@@ -185,7 +185,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setUpdatePhoto() {
-        viewModel.getUploadImage("d400180132", photo!!).observe(this){
+        viewModel.getUploadImage(userId.toString(), photo!!).observe(this){
             when(it){
                 ApiResponse.success(it.data) ->{
                     Toast.makeText(
@@ -210,18 +210,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         }
 
     }
-
-//    private fun checkCameraPermission() {
-//        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-//            != PackageManager.PERMISSION_GRANTED
-//        ) {
-//            ActivityCompat.requestPermissions(
-//                context as Activity,
-//                arrayOf(Manifest.permission.CAMERA),
-//                REQUEST_PERMISSION
-//            )
-//        }
-//    }
 
     private fun onCameraTap() {
         ImagePicker.with(this)

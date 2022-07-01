@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -18,15 +17,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.navArgs
-import androidx.navigation.navArgument
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.reggya.traceralumni.ProfileFragment.Companion.REQUEST_PERMISSION
 import com.reggya.traceralumni.core.data.remote.ApiResponse
+import com.reggya.traceralumni.core.utils.LoginPreference
 import com.reggya.traceralumni.databinding.ActivityPostBinding
 import com.reggya.traceralumni.ui.viewmodel.PostViewModel
 import com.reggya.traceralumni.ui.viewmodel.ViewModelFactory
-import com.reggya.traceralumni.core.utils.LoginPreference
 import java.io.File
 
 class PostActivity : AppCompatActivity(){
@@ -34,7 +31,7 @@ class PostActivity : AppCompatActivity(){
     private lateinit var binding: ActivityPostBinding
     private lateinit var viewModel: PostViewModel
 
-    private var description = ""
+    private var description  = ""
     private var link = ""
     private var image: File? = null
 
@@ -47,9 +44,11 @@ class PostActivity : AppCompatActivity(){
         binding = ActivityPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+
         binding.btSubmit.setOnClickListener {
             description = binding.captions.text.toString()
-            setObserver(description)
+            setObserver()
         }
         binding.btCamera.setOnClickListener {
             checkCameraPermission()
@@ -62,7 +61,7 @@ class PostActivity : AppCompatActivity(){
         ImagePicker.with(this)
             .crop()
             .compress(1024)
-            .maxResultSize(150, 150)
+            .maxResultSize(1080, 1080)
             .cropSquare()
             .createIntent { intent ->
                 startForProfileImageResult.launch(intent)
@@ -103,58 +102,39 @@ class PostActivity : AppCompatActivity(){
             }
         }
 
-    private fun setObserver(description: String) {
+    private fun setObserver() {
         val preference = LoginPreference(this)
-        val user_id = preference.getUsername()
-
-        Toast.makeText(this, "123", Toast.LENGTH_SHORT).show()
-//        description = binding.captions.text.toString()
+        val userId = preference.getUsername()
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[PostViewModel::class.java]
 
-        if (user_id != null) {
-            viewModel.insertPost("d400180132", image, description,link).observe(this) {
+//        if (image != null || description.isNotEmpty() ) {
+            viewModel.insertPost(userId.toString(), image, description, link).observe(this) {
                 when (it) {
                     ApiResponse.success(it.data) -> {
-                        Toast.makeText(this, "222", Toast.LENGTH_SHORT).show()
                         showProgressBar()
                         startActivity(Intent(this, MainActivity::class.java))
+                        finish()
                     }
                 }
-            }
+//            }
         }
     }
 
     private fun showProgressBar() {
-//        val dialog = Dialog(this)
-//        dialog.setContentView(R.layout.progress_bar)
-//
-//        if (dialog.window != null) dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//
-//        dialog.show()
-
-        val dialog = AlertDialog.Builder(this, R.style.AlertDialogTheme)
+        val dialog = AlertDialog.Builder(this).create()
         val inflater = this.layoutInflater
         val view = inflater.inflate(R.layout.progress_bar, null)
         dialog.setView(view)
-
-//        val tvTitle = view.findViewById<TextView>(R.id.tv_alert_dialog1)
-//        tvTitle.text = title
-
-        val alertDialog = dialog.create()
-//        alertBinding.btSave.setOnClickListener {
-//            val newData = alertBinding.input.text.toString().trim()
-//            if (title == getString(R.string.title_ad_alumni)) setData(newData,"","","","")
-//            else setData("", newData,"","","")
-//        }
-//
-//        alertBinding.btCancel.setOnClickListener {
-//            dialog.create().dismiss()
-//        }
-
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialog.show()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
 
 }

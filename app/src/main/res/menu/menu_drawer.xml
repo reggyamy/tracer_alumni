@@ -16,7 +16,8 @@
                     android:icon="@drawable/ic_key"/>
             </menu>
         </item>
-
+    </group>
+    <group android:checkableBehavior="single">
         <item android:title="@string/pengaturan_tambahan">
             <menu>
                 <item
@@ -25,7 +26,8 @@
                     android:icon="@drawable/ic_translate"/>
             </menu>
         </item>
-
+    </group>
+    <group android:checkableBehavior="single">
         <item android:title="@string/interaksi">
             <menu>
                 <item
@@ -35,6 +37,5 @@
             </menu>
         </item>
     </group>
-
 
 </menu>

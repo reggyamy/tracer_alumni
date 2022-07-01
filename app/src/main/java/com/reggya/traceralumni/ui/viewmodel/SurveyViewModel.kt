@@ -2,10 +2,7 @@ package com.reggya.traceralumni.ui.viewmodel
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
-import com.reggya.traceralumni.core.data.model.SurveyResponse
-import com.reggya.traceralumni.core.data.remote.ApiResponse
 import com.reggya.traceralumni.core.domain.UseCase
-import io.reactivex.rxjava3.core.Flowable
 
 class SurveyViewModel(private val useCase: UseCase): ViewModel() {
 
@@ -20,8 +17,8 @@ class SurveyViewModel(private val useCase: UseCase): ViewModel() {
                       jobStatus: String,
                       company: String,
                       companyAddress: String,
-                      yearOfWork: String,
                       position: String,
+                      yearOfWork: String,
                       salary: String,
                       feedback: String
     ) =

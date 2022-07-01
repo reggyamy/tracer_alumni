@@ -1,28 +1,26 @@
 package com.reggya.traceralumni
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.github.dhaval2404.imagepicker.ImagePicker
 import com.reggya.traceralumni.BuildConfig.PHOTO_URL
-import com.reggya.traceralumni.PostActivity.Companion.EXTRA_POST_IMAGE
 import com.reggya.traceralumni.core.data.remote.ApiResponse
 import com.reggya.traceralumni.core.data.remote.ApiResponseType
 import com.reggya.traceralumni.core.utils.LoginPreference
 import com.reggya.traceralumni.databinding.ContentHomeBinding
+import com.reggya.traceralumni.databinding.FragmentHomeBinding
 import com.reggya.traceralumni.ui.ConnectionLiveData
 import com.reggya.traceralumni.ui.RefreshView
 import com.reggya.traceralumni.ui.adapter.PostsAdapter
@@ -34,56 +32,94 @@ import kotlin.system.exitProcess
 
 class HomeFragment : Fragment() {
 
+    private lateinit var _binding: FragmentHomeBinding
     private lateinit var binding : ContentHomeBinding
     private lateinit var viewModel: PostViewModel
     private lateinit var userViewModel: ProfileViewModel
-
+    private val postsAdapter = PostsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = ContentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = _binding.contentHome
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (checkInternetConnection()){
-            setUpViewModel()
-            setUpUI()
-        }else{
-            setLoading(ApiResponseType.INTERNET_LOST)
-            binding.viewNoConnection.buttonConnect.setOnClickListener {
-                checkInternetConnection()
-                if (checkInternetConnection()) {
-                    setLoading(ApiResponseType.SUCCESS)
-                    Toast.makeText(this.context, this.getString(R.string.connected), Toast.LENGTH_SHORT).show()
-                }
-                else {
-                    Toast.makeText(this.context, this.getString(R.string.not_connected), Toast.LENGTH_SHORT).show()
+        val factory = ViewModelFactory.getInstance(this.requireContext())
+        viewModel = ViewModelProvider(this, factory)[PostViewModel::class.java]
+        userViewModel = ViewModelProvider(this, factory)[ProfileViewModel::class.java]
+
+//        binding.swipeRefresh.setOnRefreshListener(this)
+        val cld = ConnectionLiveData(this.requireContext())
+        checkInternetConnection(cld)
+
+    }
+
+    private fun checkInternetConnection(cld: ConnectionLiveData?) {
+        cld?.observe(viewLifecycleOwner){ isConnected ->
+            if (isConnected){
+                setUpViewModel()
+                setUpUI()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    setUpViewModel()
+                }, 1000)
+            }else {
+                setLoading(ApiResponseType.INTERNET_LOST)
+                _binding.viewNoConnection.buttonConnect.setOnClickListener {
+                    cld.observe(viewLifecycleOwner) { isConnected ->
+                        if (isConnected) {
+                            setUpViewModel()
+                            _binding.viewNoConnection.layoutNoConnection.visibility = View.GONE
+                            Toast.makeText(
+                                this.context,
+                                this.getString(R.string.connected),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                this.context,
+                                this.getString(R.string.not_connected),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 }
             }
         }
     }
 
-    private fun checkInternetConnection(): Boolean {
-        val connectivityManager = ConnectionLiveData()
-        return connectivityManager.checkInternetConnection(this.requireContext())
-    }
-
+    @SuppressLint("NotifyDataSetChanged")
     private fun setUpViewModel() {
-        val factory = ViewModelFactory.getInstance(requireContext())
-        viewModel = ViewModelProvider(this, factory)[PostViewModel::class.java]
-        userViewModel = ViewModelProvider(this, factory)[ProfileViewModel::class.java]
+        viewModel.getAllPost().observe(viewLifecycleOwner) { apiResponse ->
+            when (apiResponse) {
+                ApiResponse.success(apiResponse.data) ->{
+                    setLoading(ApiResponseType.SUCCESS)
+                    postsAdapter.setNewData(apiResponse.data?.reversed())
+                    postsAdapter.notifyDataSetChanged()
+                }
+                ApiResponse.empty() -> setLoading(ApiResponseType.EMPTY)
+                ApiResponse.error(apiResponse.message) ->{
+                    setLoading(ApiResponseType.ERROR)
+                    _binding.viewServerError.buttonConnect.setOnClickListener {
+                        exitProcess(0)
+                    }
+                }
+
+            }
+        }
+
     }
 
     @SuppressLint("NotifyDataSetChanged", "InflateParams")
     private fun setUpUI() {
         activity?.actionBar?.hide()
-        val postsAdapter = PostsAdapter()
+//        val postsAdapter = PostsAdapter()
         val preferences = LoginPreference(this.requireContext())
         val userId = preferences.getUsername().toString()
         val name = preferences.getName().toString()
@@ -118,35 +154,17 @@ class HomeFragment : Fragment() {
         }
 
         userViewModel.getUserById(userId).observe(viewLifecycleOwner){
-            Glide.with(this)
+            Glide.with(this).asBitmap()
                 .load(PHOTO_URL + it.data?.photo)
                 .error(R.drawable.ic_avatar)
                 .into(binding.image)
-        }
 
-        viewModel.getAllPost().observe(viewLifecycleOwner) { apiResponse ->
-            when (apiResponse) {
-                ApiResponse.success(apiResponse.data) ->{
-                    refreshView.refresh(15000)
-                    setLoading(ApiResponseType.SUCCESS)
-                    postsAdapter.setNewData(apiResponse.data?.reversed())
-                    postsAdapter.notifyDataSetChanged()
-                }
-                ApiResponse.empty() -> setLoading(ApiResponseType.EMPTY)
-                ApiResponse.error(apiResponse.message) ->{
-                    setLoading(ApiResponseType.ERROR)
-                    binding.viewServerError.buttonConnect.setOnClickListener {
-                        exitProcess(0)
-                    }
-                }
-
-            }
         }
 
         postsAdapter.btCommentOnClick = { postResponse ->
-            viewModel.insertComments(postResponse?.postId.toString(), postResponse?.userId.toString(), name, postResponse?.body.toString())
+            viewModel.insertComments(postResponse?.postId.toString(),preferences.getUsername().toString(), name, postResponse?.body.toString())
                 .observe(viewLifecycleOwner){
-                    refreshView.refresh(1000)
+                    setUpViewModel()
                     Toast.makeText(this.context, "Komentar ditambahkan", Toast.LENGTH_SHORT).show()
                 }
         }
@@ -155,7 +173,7 @@ class HomeFragment : Fragment() {
             viewModel.deleteLike(it?.postId.toString(), name).observe(viewLifecycleOwner) { apiResponse ->
                 when (apiResponse) {
                     ApiResponse.success(apiResponse.data) -> {
-                        refreshView.refresh(1000)
+                        setUpViewModel()
                         Toast.makeText(this.context, "Batal menyukai", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -166,7 +184,7 @@ class HomeFragment : Fragment() {
             viewModel.insertLike(it?.postId.toString(), name).observe(viewLifecycleOwner) { apiResponse ->
                 when (apiResponse) {
                     ApiResponse.success(apiResponse.data) -> {
-                        refreshView.refresh(1000)
+                        setUpViewModel()
                         Toast.makeText(this.context, "Disukai", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -186,36 +204,41 @@ class HomeFragment : Fragment() {
             ApiResponseType.SUCCESS -> {
                 binding.shimmer.visibility = View.GONE
                 binding.rvPosts.visibility = View.VISIBLE
-                binding.noPost.viewNoPost.visibility = View.GONE
-                binding.viewServerError.layoutServerDown.visibility = View.GONE
-                binding.viewNoConnection.layoutNoConnection.visibility = View.GONE
+                _binding.noPost.viewNoPost.visibility = View.GONE
+                _binding.viewServerError.layoutServerDown.visibility = View.GONE
+                _binding.viewNoConnection.layoutNoConnection.visibility = View.GONE
             }
             ApiResponseType.EMPTY -> {
                 binding.shimmer.visibility = View.GONE
                 binding.rvPosts.visibility = View.GONE
-                binding.noPost.viewNoPost.visibility  = View.VISIBLE
-                binding.viewServerError.layoutServerDown.visibility = View.GONE
-                binding.viewNoConnection.layoutNoConnection.visibility = View.GONE
+                _binding.noPost.viewNoPost.visibility  = View.VISIBLE
+                _binding.viewServerError.layoutServerDown.visibility = View.GONE
+                _binding.viewNoConnection.layoutNoConnection.visibility = View.GONE
             }
             ApiResponseType.ERROR ->{
                 binding.shimmer.visibility = View.GONE
                 binding.rvPosts.visibility = View.GONE
-                binding.noPost.viewNoPost.visibility  = View.GONE
-                binding.viewServerError.buttonConnect.visibility = View.INVISIBLE
-                binding.viewServerError.layoutServerDown.visibility = View.VISIBLE
-                binding.viewNoConnection.layoutNoConnection.visibility = View.GONE
+                _binding.noPost.viewNoPost.visibility  = View.GONE
+                _binding.viewServerError.buttonConnect.visibility = View.INVISIBLE
+                _binding.viewServerError.layoutServerDown.visibility = View.VISIBLE
+                _binding.viewNoConnection.layoutNoConnection.visibility = View.GONE
             }
             ApiResponseType.INTERNET_LOST ->{
                 binding.shimmer.visibility = View.GONE
                 binding.rvPosts.visibility = View.GONE
-                binding.noPost.viewNoPost.visibility = View.GONE
-                binding.viewServerError.layoutServerDown.visibility = View.GONE
-                binding.viewNoConnection.layoutNoConnection.visibility = View.VISIBLE
+                _binding.noPost.viewNoPost.visibility = View.GONE
+                _binding.viewServerError.layoutServerDown.visibility = View.GONE
+                _binding.viewNoConnection.layoutNoConnection.visibility = View.VISIBLE
             }
         }
 
     }
 
+//    @SuppressLint("NotifyDataSetChanged")
+//    override fun onRefresh() {
+//        setUpViewModel()
+//        binding.swipeRefresh.isRefreshing = false
+//    }
 
 
 }

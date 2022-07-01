@@ -28,13 +28,13 @@ class Interactor (private val iRepository: IRepository): UseCase{
         jobStatus: String,
         company: String,
         companyAddress: String,
-        yearOfWork: String,
         position: String,
+        yearOfWork: String,
         salary: String,
         feedback: String
-    ): Flowable<ApiResponse<SurveyResponse>> =
+    ): Flowable<ApiResponse<List<SurveyResponse>>> =
         iRepository.getSurveyUser(id,name,major, yearsOfEntry, graduationYear,gpa,jobStatus,
-            company,companyAddress,yearOfWork,position,salary, feedback)
+            company,companyAddress,position,yearOfWork,salary, feedback)
 
     override fun getJobs(): Flowable<ApiResponse<List<JobsResponse>>> =
         iRepository.getJobs()

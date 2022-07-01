@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_server_down"
     android:layout_marginBottom="16dp"
     android:visibility="gone"
@@ -24,13 +23,12 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_server_error"/>
+            android:src="@drawable/ic_server_down"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Server Down"
-            android:layout_marginTop="15dp"
             android:fontFamily="@font/poppins_semibold"
             android:textSize="20sp"
             android:textColor="@color/black"

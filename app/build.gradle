@@ -7,15 +7,19 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
 android {
     compileSdk 31
 
     defaultConfig {
         applicationId "com.reggya.traceralumni"
-        minSdk 19
+        minSdk 21
         targetSdk 31
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         buildConfigField 'String', 'BASE_URL', BASE_URL
         buildConfigField 'String', 'PHOTO_URL', IMAGE_URL
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -37,12 +41,8 @@ android {
     buildFeatures{
         viewBinding true
     }
-}
 
-//configurations {
-//    cleanedAnnotations
-//    implementation.exclude group: 'org.jetbrains' , module:'annotations'
-//}
+}
 
 dependencies {
 
@@ -52,21 +52,23 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.5.0-rc01'
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.bumptech.glide:glide:4.13.1'
+//    implementation 'com.github.bumptech.glide:annotations:4.13.1'
+//    implementation "com.github.bumptech.glide:okhttp3-integration:4.11.0" //okhttp.OkHttpGlideModule
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
+    implementation "com.github.bumptech.glide:volley-integration:4.11.0"
     implementation 'com.google.android.gms:play-services-cast-framework:21.0.1'
-//    implementation 'com.github.smarteist:autoimageslider:1.4.0'
-//    implementation 'com.github.smarteist:autoimageslider:1.4.0-appcompat'
-//    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+
     implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
     implementation 'androidx.room:room-rxjava3:2.5.0-alpha01'
+
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
@@ -74,11 +76,8 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.5.0-alpha01'
     androidTestImplementation "androidx.room:room-testing:2.5.0-alpha01"
 
-
-    implementation 'com.airbnb.android:lottie:3.4.1'
-
-
     //Retrofit
+    implementation 'androidx.preference:preference:1.2.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3'
@@ -91,6 +90,9 @@ dependencies {
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:29.3.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    implementation 'org.conscrypt:conscrypt-android:2.5.1'
 
 
 }

@@ -2,12 +2,7 @@ package com.reggya.traceralumni.ui.viewmodel
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
-import com.reggya.traceralumni.core.data.model.CommentsItem
-import com.reggya.traceralumni.core.data.model.LikesItem
-import com.reggya.traceralumni.core.data.model.PostResponse
-import com.reggya.traceralumni.core.data.remote.ApiResponse
 import com.reggya.traceralumni.core.domain.UseCase
-import io.reactivex.rxjava3.core.Flowable
 import java.io.File
 
 class PostViewModel(private val useCase: UseCase) : ViewModel() {

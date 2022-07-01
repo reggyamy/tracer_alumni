@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.reggya.traceralumni.databinding.ActivitySplashScreenBinding
+import com.reggya.traceralumni.ui.ConnectionLiveData
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
@@ -17,7 +19,6 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         val appName = arrayOf("T","r","a","c","e","r"," ","A","l","u","m","n","i" )
 
@@ -32,7 +33,6 @@ class SplashScreen : AppCompatActivity() {
             startActivity(intent)
             finish()
         }, 2500)
-
 
     }
 }

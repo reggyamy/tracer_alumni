@@ -8,7 +8,7 @@
         </shape>
     </item>
 
-    <item android:gravity="center_vertical|left" android:left="10dp">
+    <item android:gravity="center_vertical|left" android:left="5dp" android:right="46dp" android:top="8dp" android:bottom="8dp">
         <layer-list>
             <item >
                 <shape android:shape="rectangle">

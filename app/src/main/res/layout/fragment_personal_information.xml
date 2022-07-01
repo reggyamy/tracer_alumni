@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".PersonalInformationFragment"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Informasi Pribadi"
+        app:navigationIcon="@drawable/ic_back"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/personal_info_notice"
+        style="@style/text_medium_16"
+        android:paddingVertical="16dp"
+        android:paddingHorizontal="20dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text_medium_18"
+        android:paddingTop="16dp"
+        android:paddingHorizontal="16dp"
+        android:text="Email"/>
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text_reg_16"
+        android:maxLines="1"
+        android:paddingHorizontal="16dp"
+        tools:text="@tools:sample/lorem/random"/>
+
+    <TextView
+        style="@style/text_medium_18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="16dp"
+        android:text="ID Siswa" />
+
+    <TextView
+        android:id="@+id/student_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text_reg_16"
+        android:paddingHorizontal="16dp"
+        tools:text="@tools:sample/lorem"/>
+
+</LinearLayout>

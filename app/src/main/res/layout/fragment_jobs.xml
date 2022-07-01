@@ -1,123 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="16dp"
+    android:id="@+id/swipe_refresh"
     android:paddingHorizontal="16dp"
-    android:background="#F2F7FF"
     tools:context=".JobsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <EditText
-        android:id="@+id/search_bar"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:padding="10dp"
-        style="@style/text_reg_16"
-        android:hint="Cari lowongan pekerjaan disini"
-        android:background="@drawable/bg_search_bar"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:padding="10dp"
+            style="@style/text_reg_16"
+            android:singleLine="true"
+            android:hint="@string/search_hint"
+            android:background="@drawable/bg_search_bar"
+            tools:ignore="MissingConstraints" />
 
-    <ImageButton
-        android:id="@+id/bt_search"
-        android:layout_width="50dp"
-        android:layout_height="48dp"
-        android:background="@drawable/bg_bt_search"
-        app:layout_constraintEnd_toEndOf="@+id/search_bar"
-        android:src="@drawable/ic_search__1_"
-        tools:ignore="MissingConstraints"/>
+        <ImageButton
+            android:id="@+id/bt_search"
+            android:layout_width="50dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:background="@drawable/bg_bt_search"
+            app:layout_constraintEnd_toEndOf="@+id/search_bar"
+            android:src="@drawable/ic_search__1_"
+            tools:ignore="MissingConstraints"/>
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:id="@+id/search_no_result"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:cardCornerRadius="15dp"-->
-<!--        app:cardElevation="0dp"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        android:visibility="visible"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/search_bar"-->
-<!--        android:layout_marginTop="60dp">-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_jobs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar"
+            tools:listitem="@layout/job_item"/>
 
-<!--        <ImageView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/ic_not_found"-->
-<!--            android:layout_marginTop="40dp"/>-->
+        <LinearLayout
+            android:id="@+id/shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar"
+            app:shimmer_duration="800"
+            android:layout_marginTop="50dp">
 
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Pencarian Tidak Ditemukan"-->
-<!--            android:fontFamily="@font/poppins_semibold"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:layout_marginTop="400dp"-->
-<!--            android:gravity="center"/>-->
+            <include layout="@layout/shimmer_jobs" />
+            <include layout="@layout/shimmer_jobs" />
+            <include layout="@layout/shimmer_jobs" />
+            <include layout="@layout/shimmer_jobs" />
+            <include layout="@layout/shimmer_jobs" />
+            <include layout="@layout/shimmer_jobs" />
 
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Silahkan coba lagi pencarian dengan kata kunci yang lain"-->
-<!--            style="@style/text_medium_16"-->
-<!--            android:textColor="@color/dark_grey"-->
-<!--            android:paddingHorizontal="25dp"-->
-<!--            android:layout_marginTop="440dp"-->
-<!--            android:layout_marginBottom="50dp"-->
-<!--            android:gravity="center"/>-->
+        </LinearLayout>
 
-<!--    </androidx.cardview.widget.CardView>-->
+        <include
+            android:id="@+id/view_noConnection"
+            layout="@layout/alert_no_connection"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_jobs"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar"
-        tools:listitem="@layout/job_item"/>
+        <include
+            android:id="@+id/search_no_result"
+            layout="@layout/alert_search"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp" />
 
-    <LinearLayout
-        android:id="@+id/shimmer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar"
-        app:shimmer_duration="800"
-        android:layout_marginTop="60dp">
+        <include
+            android:id="@+id/view_serverError"
+            layout="@layout/alert_server_down"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="60dp" />
 
-        <include layout="@layout/shimmer_jobs" />
-        <include layout="@layout/shimmer_jobs" />
-        <include layout="@layout/shimmer_jobs" />
-        <include layout="@layout/shimmer_jobs" />
-        <include layout="@layout/shimmer_jobs" />
-        <include layout="@layout/shimmer_jobs" />
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorColor="@color/blue"
+            app:trackColor="@color/blue"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
 
-    <include
-        android:id="@+id/view_noConnection"
-        layout="@layout/alert_no_connection"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar"
-        android:layout_marginTop="60dp" />
+    </FrameLayout>
 
-    <include
-        android:id="@+id/search_no_result"
-        layout="@layout/alert_search"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar"
-        android:layout_marginTop="60dp" />
 
-    <include
-        android:id="@+id/view_serverError"
-        layout="@layout/alert_server_down"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar"
-        android:layout_marginTop="60dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

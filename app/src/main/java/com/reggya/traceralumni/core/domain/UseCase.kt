@@ -22,11 +22,11 @@ interface UseCase {
                       jobStatus: String,
                       company: String,
                       companyAddress: String,
-                      yearOfWork: String,
                       position: String,
+                      yearOfWork: String,
                       salary: String,
                       feedback: String
-    ): Flowable<ApiResponse<SurveyResponse>>
+    ): Flowable<ApiResponse<List<SurveyResponse>>>
 
     fun getJobs(): Flowable<ApiResponse<List<JobsResponse>>>
 
@@ -40,7 +40,7 @@ interface UseCase {
 
     fun getSearchJobs(query: String): Flowable<ApiResponse<List<JobsResponse>>>
 
-    fun getUploadImage(id:String, photo:File):Flowable<ApiResponse<UserResponse>>
+    fun getUploadImage(id:String, photo:File): Flowable<ApiResponse<UserResponse>>
 
     fun getUpdateProfile(
         id: String?, alumni: String?, job: String?, address: String?, about: String?, password: String?

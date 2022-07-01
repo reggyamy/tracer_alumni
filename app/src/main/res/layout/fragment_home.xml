@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="true"
     tools:context=".HomeFragment">
 
-<!--  <LinearLayout-->
-<!--      android:id="@+id/shimmer"-->
-<!--      android:layout_width="match_parent"-->
-<!--      android:layout_height="match_parent"-->
-<!--      app:shimmer_duration="800"-->
-<!--      android:orientation="vertical"-->
-<!--      android:layout_marginTop="130dp">-->
+<!--        <androidx.core.widget.NestedScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:fillViewport="true">-->
 
-<!--    <include-->
-<!--        layout="@layout/shimmer_posts"/>-->
+                <include
+                    android:id="@+id/content_home"
+                    layout="@layout/content_home"/>
 
-<!--  </LinearLayout>-->
-<!--  -->
-  <androidx.core.widget.NestedScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-
-    <include
-        android:id="@+id/content_home"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        layout="@layout/content_home"/>
-
-  </androidx.core.widget.NestedScrollView>
+<!--        </androidx.core.widget.NestedScrollView>-->
 
 
-</LinearLayout>
+        <include
+            android:id="@+id/no_post"
+            layout="@layout/alert_no_found"
+            android:layout_marginTop="145dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+        <include
+            android:id="@+id/viewNoConnection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="145dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            layout="@layout/alert_no_connection"/>
+
+        <include
+            android:id="@+id/viewServerError"
+            layout="@layout/alert_server_down"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="145dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"/>
+
+</FrameLayout>

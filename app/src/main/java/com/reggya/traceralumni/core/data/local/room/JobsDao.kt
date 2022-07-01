@@ -1,7 +1,6 @@
 package com.reggya.traceralumni.core.data.local.room
 
 import androidx.room.*
-import androidx.room.Dao
 import com.reggya.traceralumni.core.data.local.entity.JobsEntity
 import io.reactivex.rxjava3.core.Flowable
 

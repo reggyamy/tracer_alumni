@@ -8,9 +8,9 @@ import android.text.Html
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.reggya.traceralumni.core.domain.model.JobsModel
 import com.reggya.traceralumni.databinding.ActivityDetailJobBinding
 import com.reggya.traceralumni.databinding.ContentDetailJobBinding
-import com.reggya.traceralumni.core.domain.model.JobsModel
 import com.reggya.traceralumni.ui.viewmodel.JobsViewModel
 import com.reggya.traceralumni.ui.viewmodel.ViewModelFactory
 
@@ -31,6 +31,7 @@ class DetailJobActivity : AppCompatActivity() {
         binding_ = binding.contentJobDetail
         setContentView(binding.root)
 
+        setSupportActionBar(binding.contentJobDetail.toolbar)
         val job = intent.getParcelableExtra<JobsModel>(KEY_JOB)
 
         val factory = ViewModelFactory.getInstance(this)
@@ -105,10 +106,10 @@ class DetailJobActivity : AppCompatActivity() {
 
     }
 
-//    private fun setButtonBookmark(state: Boolean) {
-//        if(state) binding_.btBookmark.setImageResource(R.drawable.ic_bookmark_filled)
-//        else binding_.btBookmark.setImageResource(R.drawable.ic_bookmark_unfilled)
-//    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 
 
 

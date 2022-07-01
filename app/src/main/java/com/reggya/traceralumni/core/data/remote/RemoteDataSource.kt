@@ -15,7 +15,6 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
-import java.net.SocketTimeoutException
 
 class RemoteDataSource private constructor(private val apiService: ApiService){
 
@@ -63,20 +62,20 @@ class RemoteDataSource private constructor(private val apiService: ApiService){
 
     @SuppressLint("LongLogTag")
     fun getSurveyUser(id : String, name: String, major: String, yearsOfEntry: String, graduationYear: String,
-                      gpa: String, jobStatus: String, company:String, companyAddress: String, yearOfWork: String,
-                      position: String, salary: String, feedback: String): Flowable<ApiResponse<SurveyResponse>>{
-        val resultData = PublishSubject.create<ApiResponse<SurveyResponse>>()
+                      gpa: String, jobStatus: String, company:String, companyAddress: String,position: String, yearOfWork: String,
+                      salary: String, feedback: String): Flowable<ApiResponse<List<SurveyResponse>>>{
+        val resultData = PublishSubject.create<ApiResponse<List<SurveyResponse>>>()
 
         val client = apiService.getSurvey(id,name,major, yearsOfEntry, graduationYear,gpa,jobStatus,
-                                        company,companyAddress,yearOfWork,position,salary, feedback)
+                                        company,companyAddress,position,yearOfWork,salary, feedback)
             client
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .take(1)
                 .subscribe({ surveyResponse ->
                     resultData.onNext(
-                        (if (surveyResponse.studentId?.isNotEmpty() == true) ApiResponse.success(surveyResponse)
-                        else ApiResponse.empty()) as ApiResponse<SurveyResponse>?
+                        if (surveyResponse.isNotEmpty()) ApiResponse.success(surveyResponse)
+                        else ApiResponse.empty()
                     )
                 },{ throwable ->
                     resultData.onNext(ApiResponse.error(throwable.message.toString()))

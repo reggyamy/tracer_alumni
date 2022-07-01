@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.Resource
 import com.reggya.traceralumni.DetailJobActivity
 import com.reggya.traceralumni.DetailJobActivity.Companion.KEY_JOB
 import com.reggya.traceralumni.R
-import com.reggya.traceralumni.databinding.JobItemBinding
 import com.reggya.traceralumni.core.domain.model.JobsModel
+import com.reggya.traceralumni.databinding.JobItemBinding
 
 class JobsAdapter: RecyclerView.Adapter<JobsAdapter.ViewHolder>() {
 
@@ -30,8 +29,10 @@ class JobsAdapter: RecyclerView.Adapter<JobsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val job = jobs[position]
-        holder.bind(job)
+        if (job != null){
 
+            holder.bind(job)
+        }
     }
 
     override fun getItemCount(): Int = jobs.size

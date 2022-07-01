@@ -1,6 +1,5 @@
 package com.reggya.traceralumni.ui.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +8,6 @@ import com.reggya.traceralumni.BuildConfig
 import com.reggya.traceralumni.R
 import com.reggya.traceralumni.core.data.model.CommentsItem
 import com.reggya.traceralumni.databinding.CommentItemBinding
-import com.reggya.traceralumni.databinding.PostItemBinding
 
 class CommentsAdapter(comments: List<CommentsItem?>?) : RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
 

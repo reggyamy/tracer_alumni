@@ -5,7 +5,6 @@ import com.reggya.traceralumni.core.data.model.*
 import com.reggya.traceralumni.core.data.remote.ApiResponse
 import com.reggya.traceralumni.core.domain.model.JobsModel
 import io.reactivex.rxjava3.core.Flowable
-import retrofit2.http.Field
 import java.io.File
 
 interface IRepository {
@@ -23,11 +22,11 @@ interface IRepository {
                       jobStatus: String,
                       company: String,
                       companyAddress: String,
-                      yearOfWork: String,
                       position: String,
+                      yearOfWork: String,
                       salary: String,
                       feedback: String
-    ): Flowable<ApiResponse<SurveyResponse>>
+    ): Flowable<ApiResponse<List<SurveyResponse>>>
 
     fun getJobs(): Flowable<ApiResponse<List<JobsResponse>>>
 

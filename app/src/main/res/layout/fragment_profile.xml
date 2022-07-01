@@ -31,11 +31,13 @@
 
     <TextView
         android:id="@+id/name"
-        style="@style/text_medium_16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_semibold"
         android:paddingHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +48,7 @@
         android:id="@+id/tv_alumni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:text="Alumni"
         style="@style/text_medium_16"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +65,6 @@
         android:hint="Teknik Elektro 2018"
         android:textColor="@color/blue"
         style="@style/text_reg_16"
-        android:textColorHint="#79AFF8"
         android:paddingVertical="5dp"
         android:paddingEnd="30dp"
         android:maxLines="1"
@@ -100,7 +101,6 @@
         android:layout_marginHorizontal="25dp"
         android:background="@drawable/bg_textview"
         android:hint="Android developer"
-        android:textColorHint="#79AFF8"
         android:textColor="@color/blue"
         style="@style/text_reg_16"
         android:paddingVertical="5dp"
@@ -139,10 +139,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:background="@drawable/bg_textview"
-        android:hint="Jakarta"
+        android:hint="Surakarta"
         style="@style/text_reg_16"
         android:textColor="@color/blue"
-        android:textColorHint="#79AFF8"
         android:paddingVertical="5dp"
         android:paddingEnd="30dp"
         android:maxLines="1"
@@ -182,9 +181,7 @@
         android:gravity="fill_horizontal"
         android:textColor="@color/blue"
         app:layout_constraintTop_toBottomOf="@+id/tv_about"
-        android:hint="Ceritakan sedikit tentang dirimu"
-        tools:text="@tools:sample/lorem/random"
-        android:textColorHint="#79AFF8"/>
+        android:hint="Ceritakan sedikit tentang dirimu"/>
 
     <ImageButton
         android:id="@+id/add_about"

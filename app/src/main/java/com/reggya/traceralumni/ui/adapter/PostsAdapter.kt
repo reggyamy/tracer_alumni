@@ -5,13 +5,13 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.MenuView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.reggya.traceralumni.BuildConfig.PHOTO_URL
 import com.reggya.traceralumni.R
+import com.reggya.traceralumni.UserActivity
+import com.reggya.traceralumni.UserActivity.Companion.EXTRA_ID
 import com.reggya.traceralumni.core.data.model.PostResponse
 import com.reggya.traceralumni.core.utils.LoginPreference
 import com.reggya.traceralumni.databinding.PostItemBinding
@@ -26,9 +26,12 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun setNewData(newData: List<PostResponse?>?){
-        if (newData == null) return posts.clear()
-        posts.addAll(newData)
-        notifyDataSetChanged()
+        if (newData != null){
+            posts.clear()
+            posts.addAll(newData)
+            notifyDataSetChanged()
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,6 +42,7 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
         val post = posts[position]
         if (post != null){
             holder.bind(post)
+
         }
     }
 
@@ -58,8 +62,11 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
             binding.rvComments.layoutManager = LinearLayoutManager(itemView.context)
             binding.rvComments.adapter = commentsAdapter
 
-            binding.image.setOnClickListener { itemView.findNavController().navigate(R.id.postActivity) }
-            binding.name.setOnClickListener { itemView.findNavController().navigate(R.id.postActivity) }
+            val intent = Intent(itemView.context, UserActivity::class.java)
+            intent.putExtra(EXTRA_ID, post.author?.userId)
+
+            binding.photoUser.setOnClickListener { itemView.context.startActivity(intent)}
+            binding.name.setOnClickListener { itemView.context.startActivity(intent)}
 
             val preference = LoginPreference(itemView.context)
             val name = preference.getName().toString()
@@ -74,6 +81,7 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
                     btDislikeOnClick?.invoke(post)
                 }
             }else{
+                binding.btLike.setImageResource(R.drawable.ic_dislike)
                 binding.btLike.setOnClickListener {
                     binding.btLike.setImageResource(R.drawable.ic_heart)
                     btLikeOnClick?.invoke(post)

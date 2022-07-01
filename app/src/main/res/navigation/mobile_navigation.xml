@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_navigation_home_to_postActivity"
             app:destination="@id/postActivity" />
-        <action
-            android:id="@+id/action_navigation_home_to_userActivity"
-            app:destination="@id/userActivity" />
     </fragment>
 
     <fragment
@@ -43,16 +40,22 @@
         android:id="@+id/navigation_profile"
         android:name="com.reggya.traceralumni.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+    </fragment>
     <activity
         android:id="@+id/postActivity"
         android:name="com.reggya.traceralumni.PostActivity"
         android:label="activity_post"
         tools:layout="@layout/activity_post" />
-    <activity
-        android:id="@+id/userActivity"
-        android:name="com.reggya.traceralumni.UserActivity"
-        android:label="activity_user"
-        tools:layout="@layout/activity_user" />
+    <fragment
+        android:id="@+id/personalInformationFragment"
+        android:name="com.reggya.traceralumni.PersonalInformationFragment"
+        android:label=""
+        tools:layout="@layout/fragment_personal_information" />
+    <fragment
+        android:id="@+id/postHistoryFragment"
+        android:name="com.reggya.traceralumni.PostHistoryFragment"
+        android:label=""
+        tools:layout="@layout/fragment_post_history" />
 
 </navigation>

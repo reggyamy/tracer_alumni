@@ -2,27 +2,41 @@ package com.reggya.traceralumni.ui
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
+import android.net.Network
+import android.net.NetworkRequest
 import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.lifecycle.LiveData
 
-class ConnectionLiveData {
+class ConnectionLiveData(context: Context) : LiveData<Boolean>(){
 
-    fun checkInternetConnection(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        @Suppress("DEPRECATION")
-        //M because active network support android version upper M
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            val network = connectivityManager.activeNetwork ?: return false
-            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+    private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-            return when{
-                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                else -> {false}
-            }
-        }else{
-            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
-            return networkInfo.isConnected
+    private val networkCallback = @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    object : ConnectivityManager.NetworkCallback(){
+
+        override fun onAvailable(network: Network) {
+            super.onAvailable(network)
+            postValue(true)
         }
+
+        override fun onLost(network: Network) {
+            super.onLost(network)
+            postValue(false)
+        }
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    override fun onActive() {
+        super.onActive()
+        val builder = NetworkRequest.Builder()
+        connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    override fun onInactive() {
+        super.onInactive()
+        connectivityManager.unregisterNetworkCallback(networkCallback)
     }
 }

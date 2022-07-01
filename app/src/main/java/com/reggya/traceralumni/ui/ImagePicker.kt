@@ -2,17 +2,12 @@ package com.reggya.traceralumni.ui
 
 import android.Manifest
 import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toFile
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.reggya.traceralumni.ProfileFragment
 
